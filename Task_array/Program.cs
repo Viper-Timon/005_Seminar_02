@@ -27,3 +27,23 @@ void PrintArray(int[] col2)
 }
 FillArray(array);
 PrintArray(array);
+int ArrayPos (int [] col3, int find)
+{
+    int count = col3.Length;
+    int index = 0;
+    int position = 0;
+    while (index < count)
+    {
+        
+        if (col3[index] == find) 
+        {
+            position = index;
+            break;
+        }
+        index++;
+    }
+    return position;
+}
+Console.Write("Введите искомый эл-т -> ");
+int findNum = int.Parse(Console.ReadLine());
+Console.WriteLine($"Номер скомого эл-та {ArrayPos(array, findNum)}");
