@@ -7,8 +7,8 @@
 // 32679 -> 6
 
 
-//оставил 2 решения, чтобы было наглядно
 // Решение задачи через строку
+
 // Console.Clear();
 // Console.WriteLine("Введите число для поиска 3го символа");
 // var txtnum = Convert.ToInt32(Console.ReadLine());
@@ -21,38 +21,38 @@
 // }
 // else Console.WriteLine("Введите число большего разряда");
 
-// Решение черезv метод с циклом
-Console.WriteLine("Введите число для поиска 3го символа слева");
+
+
+// Решение через метод с циклом
+Console.Write("Введите число ");
 int number = int.Parse(Console.ReadLine());
-int numberpos = 3; // можно вообще сделать ввод искомого номера числа, для унификации
-if (number < (10 ^ (numberpos-1))) Console.WriteLine ("Введите число большего разряда");
+// Console.Write("Номер элемента слева, который хотели найти ");
+int numberpos = 3; // int.Parse(Console.ReadLine()); // можно вообще сделать ввод искомого номера числа, для унификации
+                 
+if (number <= 0) Console.WriteLine("Введите корректное число");
+else if (number < Math.Pow(10, numberpos -1)) Console.WriteLine($"{numberpos}й цифры нет");
 else
 {
-    Console.WriteLine(FindNumLen(number, numberpos));
+    int result = FindByPos(number, numberpos);
+    Console.WriteLine($"{numberpos}й цифрой в числе {number} является {result}");
 }
-int FindNumLen(int num, int numpos)
+
+
+
+int FindByPos(int num, int numpos)
 {
-    if (num < 0) num = num * -1;
-    int div = 1;
+    int rem = num;
     int count = 0;
-    int rem = 0;
-    while (num >= div)
+    while (rem > 0)
     {
-        rem = num / div;
-        div = div * 10;
+        rem = rem / 10;
         count++;
+       // Console.WriteLine($"Счетчик = {count} " + $"остаток {rem}"); // проверочный вывод по итрерациям
     }
 
-    int numfind = (num / (div/(10 ^ numpos)))%10;
-    Console.WriteLine($"Счетчик = {count}" + $"делитель {div}" + $"остаток {rem}");
-    
-    return numfind;
-    
+    double num2 = Math.Floor(num / Math.Pow(10, count - numpos));
+    int numFind = Convert.ToInt32(num2) % 10;
+    return numFind;
 }
-
-
-
-
-
 
 
